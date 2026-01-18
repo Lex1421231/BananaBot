@@ -1,0 +1,58 @@
+import json
+from datetime import datetime
+from config import RESULTS_FILE
+
+def save_survey_result(user_data: dict):
+    """
+    Сохраняет результат опроса в текстовый файл
+    """
+    # Добавляем дату и время
+    result_data = user_data.copy()
+    result_data['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Сохраняем в текстовый файл
+    with open(RESULTS_FILE, 'a', encoding='utf-8') as f:
+        # Записываем как читаемый текст
+        f.write("=" * 50 + "\n")
+        f.write(f"Новый результат опроса ({result_data['timestamp']}):\n")
+        f.write("-" * 50 + "\n")
+        f.write(f"ID пользователя: {result_data.get('user_id', 'N/A')}\n")
+        f.write(f"Имя: {result_data.get('username', 'N/A')}\n")
+        f.write(f"Возраст: {result_data.get('age', 'N/A')}\n")
+        f.write(f"Пол: {result_data.get('gender', 'N/A')}\n")
+        f.write(f"Род деятельности: {result_data.get('activity', 'N/A')}\n")
+        f.write(f"Увлечения: {result_data.get('hobbies', 'N/A')}\n")
+        f.write("=" * 50 + "\n\n")
+    
+    # Также сохраняем в JSON формате для возможного машинного чтения
+    json_file = RESULTS_FILE.replace('.txt', '.json')
+    try:
+        # Читаем существующие данные
+        existing_data = []
+        try:
+            with open(json_file, 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            existing_data = []
+        
+        # Добавляем новый результат
+        existing_data.append(result_data)
+        
+        # Сохраняем обратно
+        with open(json_file, 'w', encoding='utf-8') as f:
+            json.dump(existing_data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Ошибка при сохранении JSON: {e}")
+
+def get_statistics():
+    """
+    Возвращает статистику по опросам
+    """
+    try:
+        with open(RESULTS_FILE, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # Простой подсчет результатов
+            count = content.count("Новый результат опроса")
+            return count
+    except FileNotFoundError:
+        return 0

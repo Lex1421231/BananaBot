@@ -1,0 +1,22 @@
+import os
+from datetime import datetime
+
+def format_timestamp(timestamp=None):
+    """Форматирует время для логов"""
+    if timestamp is None:
+        timestamp = datetime.now()
+    return timestamp.strftime("%Y-%m-%d %H:%M:%S")
+
+def log_message(update, message_type="received"):
+    """Логирует сообщение"""
+    user = update.effective_user
+    text = update.message.text if update.message else "Callback"
+    
+    log_entry = f"[{format_timestamp()}] {message_type.upper()}: "
+    log_entry += f"User {user.id} ({user.username}): {text}"
+    
+    print(log_entry)
+    
+    # Также сохраняем в файл логов
+    with open("data/bot_log.txt", "a", encoding="utf-8") as f:
+        f.write(log_entry + "\n")
