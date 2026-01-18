@@ -1,0 +1,42 @@
+from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
+
+# Клавиатура для выбора пола
+def get_gender_keyboard():
+    return ReplyKeyboardMarkup([
+        ['👨 Мужской'],
+        ['👩 Женский'],
+        ['🤷‍♂️ Другой']
+    ], resize_keyboard=True, one_time_keyboard=True)
+
+# Клавиатура для выбора деятельности
+def get_activity_keyboard():
+    return ReplyKeyboardMarkup([
+        ['💼 Работаю'],
+        ['🎓 Учусь'],
+        ['🏠 Не работаю/не учусь'],
+        ['📚 Работаю и учусь']
+    ], resize_keyboard=True, one_time_keyboard=True)
+
+# Клавиатура для увлечений (можно выбрать несколько)
+def get_hobbies_keyboard():
+    return ReplyKeyboardMarkup([
+        ['🎮 Игры', '📚 Книги'],
+        ['🎵 Музыка', '🎬 Фильмы'],
+        ['⚽ Спорт', '🍳 Кулинария'],
+        ['✈️ Путешествия', '💻 Программирование'],
+        ['✅ Готово', '⏭️ Пропустить']
+    ], resize_keyboard=True)
+
+# Клавиатура для старта опроса
+def get_start_keyboard():
+    return ReplyKeyboardMarkup([
+        ['📋 Начать опрос'],
+        ['📊 Статистика', 'ℹ️ Помощь']
+    ], resize_keyboard=True)
+
+# Клавиатура для подтверждения
+def get_confirm_keyboard():
+    return ReplyKeyboardMarkup([
+        ['✅ Да, все верно'],
+        ['✏️ Нет, изменить']
+    ], resize_keyboard=True, one_time_keyboard=True)

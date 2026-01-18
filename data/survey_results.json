@@ -1,0 +1,20 @@
+[
+  {
+    "user_id": 1397516403,
+    "username": "AlexTsvetkov142",
+    "hobbies": "Программирование, Игры, Спорт",
+    "age": 37,
+    "gender": "Мужской",
+    "activity": "Работаю и учусь",
+    "timestamp": "2026-01-18 15:52:08"
+  },
+  {
+    "user_id": 492093635,
+    "username": "anya_babok",
+    "hobbies": "Игры, Музыка",
+    "age": 33,
+    "gender": "Женский",
+    "activity": "Работаю",
+    "timestamp": "2026-01-18 15:54:19"
+  }
+]
